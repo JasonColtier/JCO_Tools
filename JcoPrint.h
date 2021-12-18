@@ -1,5 +1,5 @@
-#ifndef JCO_PRINT_H
-#define JCO_PRINT_H
+#ifndef JCOPRINT_H
+#define JCOPRINT_H
 
 #include <iostream>
 
@@ -26,31 +26,10 @@ static std::string _EnumToString(LogType logType)
 }
 
 #define LOG(...) \
-    std::cout ,\
-    "LOG     - ",\
-    __FUNCTION__,"():",__LINE__," - ",\
-    __VA_ARGS__ ,\
-    std::endl
+    std::cout<<"LOG     - "<<__FUNCTION__<<"():"<<__LINE__<<" - "<<__VA_ARGS__<<std::endl
 
 
 #define LOG_COLOR(Logtype,...) \
-    std::cout ,\
-    _EnumToString(Logtype)," - ",\
-    __FUNCTION__,"():",__LINE__," - ",\
-    __VA_ARGS__ ,\
-    "\033[0m\t\t",\
-    std::endl
+    std::cout<<_EnumToString(Logtype)<<" - "<<__FUNCTION__<<"():"<<__LINE__<<" - "<<__VA_ARGS__<<"\033[0m\t\t"<<std::endl
 
-template <typename T>
-std::ostream& operator,(std::ostream& out, const T& t) {
-    out << t;
-    return out;
-}
-
-//overloaded version to handle all those special std::endl and others...
-std::ostream& operator,(std::ostream& out, std::ostream&(*f)(std::ostream&)) {
-    out << f;
-    return out;
-}
-
-#endif //JCO_PRINT_H
+#endif //JCOPRINT_H
